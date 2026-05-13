@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, ExternalLink } from "lucide-react";
 import { CLINIC } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -149,16 +150,20 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map placeholder */}
+              {/* Clinic exterior photo */}
               <div
-                className="img-placeholder rounded-2xl"
+                className="rounded-2xl overflow-hidden relative"
                 style={{
                   height: 240,
-                  background: "linear-gradient(135deg, var(--surface) 0%, var(--border) 100%)",
-                  fontSize: 12,
                 }}
               >
-                Google Maps embed<br />Shop 4/31-35 Moorhen Drive, Yangebup<br />(embed map iframe here)
+                <Image
+                  src="https://images.pexels.com/photos/6260665/pexels-photo-6260665.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                  alt="Friendly veterinary consultation room"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  style={{ objectFit: "cover" }}
+                />
               </div>
             </AnimatedSection>
           </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { CLINIC } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/schema";
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
@@ -52,10 +53,16 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 items-center">
             <AnimatedSection direction="left">
               <div
-                className="img-placeholder rounded-2xl overflow-hidden"
-                style={{ height: 440, background: "linear-gradient(135deg, var(--surface) 0%, var(--border) 100%)", boxShadow: "0 16px 48px rgba(14,143,224,0.10)", fontSize: 13 }}
+                className="rounded-2xl overflow-hidden relative"
+                style={{ height: 440, boxShadow: "0 16px 48px rgba(14,143,224,0.10)" }}
               >
-                Clinic interior / Sam Jameson photo<br />(replace with real photo)
+                <Image
+                  src="https://images.pexels.com/photos/27177012/pexels-photo-27177012.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt="Bright veterinary clinic interior with consultation space"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  style={{ objectFit: "cover" }}
+                />
               </div>
             </AnimatedSection>
 

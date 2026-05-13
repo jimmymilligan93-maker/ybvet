@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { VETS, CLINIC } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/schema";
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
@@ -47,16 +48,24 @@ export default function TeamPage() {
                 <div className={`card flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 items-center`}>
                   {/* Portrait */}
                   <div
-                    className="img-placeholder rounded-2xl overflow-hidden shrink-0"
+                    className="rounded-2xl overflow-hidden shrink-0 relative"
                     style={{
                       width: 240,
                       height: 300,
-                      background: "linear-gradient(135deg, var(--surface) 0%, var(--border) 100%)",
                       boxShadow: "0 8px 32px rgba(14,143,224,0.12)",
-                      fontSize: 12,
                     }}
                   >
-                    {vet.name} photo<br />(replace)
+                    <Image
+                      src={
+                        i === 0
+                          ? "https://images.pexels.com/photos/6235231/pexels-photo-6235231.jpeg?auto=compress&cs=tinysrgb&w=1000"
+                          : "https://images.pexels.com/photos/6131096/pexels-photo-6131096.jpeg?auto=compress&cs=tinysrgb&w=1000"
+                      }
+                      alt={`${vet.name} consulting with a pet owner and patient`}
+                      fill
+                      sizes="240px"
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
 
                   {/* Bio */}
@@ -99,10 +108,16 @@ export default function TeamPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center max-w-5xl mx-auto">
             <AnimatedSection direction="left">
               <div
-                className="img-placeholder rounded-2xl overflow-hidden"
-                style={{ height: 320, background: "linear-gradient(135deg, var(--border) 0%, var(--surface) 100%)", fontSize: 12 }}
+                className="rounded-2xl overflow-hidden relative"
+                style={{ height: 320 }}
               >
-                Sam Jameson photo (replace)
+                <Image
+                  src="https://images.pexels.com/photos/6260665/pexels-photo-6260665.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                  alt="Clinic owner in discussion with veterinary team"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  style={{ objectFit: "cover" }}
+                />
               </div>
             </AnimatedSection>
             <AnimatedSection direction="right" delay={0.1}>

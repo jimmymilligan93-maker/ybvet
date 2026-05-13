@@ -1,6 +1,7 @@
 "use client";
 import { motion, type Transition } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Star } from "lucide-react";
 import { CLINIC } from "@/lib/data";
 import PawPrint from "@/components/ui/PawPrint";
@@ -102,20 +103,21 @@ export default function Hero() {
           >
             {/* Main circle */}
             <div
-              className="img-placeholder rounded-full overflow-hidden shadow-xl"
+              className="rounded-full overflow-hidden shadow-xl relative"
               style={{
                 width: 340,
                 height: 340,
-                background: "linear-gradient(135deg, var(--surface) 0%, var(--border) 100%)",
                 margin: "0 auto",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 13,
-                color: "var(--muted)",
               }}
             >
-              Hero photo —<br />vet with dog at floor level<br />(replace with real photo)
+              <Image
+                src="https://images.pexels.com/photos/6235231/pexels-photo-6235231.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Veterinarian gently checking a dog in a consultation room"
+                fill
+                sizes="340px"
+                preload
+                style={{ objectFit: "cover" }}
+              />
             </div>
 
             {/* Secondary offset circle */}
@@ -123,22 +125,21 @@ export default function Hero() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="absolute bottom-[-20px] right-[-20px] img-placeholder rounded-full overflow-hidden"
+              className="absolute bottom-[-20px] right-[-20px] rounded-full overflow-hidden relative"
               style={{
                 width: 180,
                 height: 180,
                 border: "4px solid white",
                 boxShadow: "0 8px 32px rgba(14,143,224,0.15)",
-                background: "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 11,
-                color: "rgba(255,255,255,0.8)",
-                textAlign: "center",
               }}
             >
-              Clinic interior<br />(replace)
+              <Image
+                src="https://images.pexels.com/photos/7210498/pexels-photo-7210498.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Clean and welcoming veterinary clinic interior"
+                fill
+                sizes="180px"
+                style={{ objectFit: "cover" }}
+              />
             </motion.div>
           </motion.div>
         </div>

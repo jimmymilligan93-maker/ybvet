@@ -20,9 +20,16 @@
 # production
 /build
 
+# Third-party Firecrawl dumps (do not commit full competitor page text)
+references/third-party-scrapes/
+
 # misc
 .DS_Store
 *.pem
+
+# Local tooling / scrapes (not part of the shipped site)
+.cursor/
+.firecrawl/
 
 # debug
 npm-debug.log*
@@ -32,6 +39,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel

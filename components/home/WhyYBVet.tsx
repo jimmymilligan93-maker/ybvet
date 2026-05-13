@@ -1,4 +1,5 @@
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
+import Image from "next/image";
 import PillBadge from "@/components/ui/PillBadge";
 import PawPrint from "@/components/ui/PawPrint";
 
@@ -79,7 +80,7 @@ export default function WhyYBVet() {
             />
             {/* Main circle */}
             <div
-              className="img-placeholder rounded-full overflow-hidden absolute"
+              className="rounded-full overflow-hidden absolute relative"
               style={{
                 width: 280,
                 height: 280,
@@ -89,11 +90,17 @@ export default function WhyYBVet() {
                 zIndex: 1,
               }}
             >
-              Vet + dog<br />(replace)
+              <Image
+                src="https://images.pexels.com/photos/4453157/pexels-photo-4453157.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Veterinarian smiling with a dog during an exam"
+                fill
+                sizes="280px"
+                style={{ objectFit: "cover" }}
+              />
             </div>
             {/* Secondary circle */}
             <div
-              className="img-placeholder rounded-full overflow-hidden absolute"
+              className="rounded-full overflow-hidden absolute relative"
               style={{
                 width: 200,
                 height: 200,
@@ -102,10 +109,15 @@ export default function WhyYBVet() {
                 border: "4px solid white",
                 boxShadow: "0 8px 32px rgba(14,143,224,0.15)",
                 zIndex: 2,
-                background: "linear-gradient(135deg, var(--surface) 0%, var(--border) 100%)",
               }}
             >
-              Vet + cat<br />(replace)
+              <Image
+                src="https://images.pexels.com/photos/6131096/pexels-photo-6131096.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Veterinarian handling a calm cat in clinic"
+                fill
+                sizes="200px"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </AnimatedSection>
         </div>

@@ -73,31 +73,70 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
   };
 }
 
+function absoluteImageUrl(src: string) {
+  if (src.startsWith("https://") || src.startsWith("http://")) return src;
+  return `https://ybvet.com.au${src.startsWith("/") ? src : `/${src}`}`;
+}
+
+export function truncateForMetaDescription(text: string, max = 155): string {
+  const t = text.trim();
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  const base = (lastSpace > 40 ? cut.slice(0, lastSpace) : cut).trimEnd();
+  return `${base}…`;
+}
+
 export function articleSchema(post: {
   title: string;
   excerpt: string;
+  /** Shorter summary for JSON-LD; falls back to excerpt. */
+  metaDescription?: string;
   date: string;
+  dateModified?: string;
   author: string;
   slug: string;
-  image: string;
+  coverSrc: string;
 }) {
+  const description = post.metaDescription ?? post.excerpt;
+  const modified = post.dateModified ?? post.date;
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.title,
-    description: post.excerpt,
+    description,
     datePublished: post.date,
+    dateModified: modified,
     author: {
       "@type": "Person",
       name: post.author,
+      url: "https://ybvet.com.au/team",
     },
     publisher: {
       "@type": "Organization",
       name: CLINIC.fullName,
       logo: { "@type": "ImageObject", url: "https://ybvet.com.au/images/logo.png" },
     },
-    image: `https://ybvet.com.au${post.image}`,
-    mainEntityOfPage: `https://ybvet.com.au/blog/${post.slug}`,
+    image: absoluteImageUrl(post.coverSrc),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://ybvet.com.au/blog/${post.slug}`,
+    },
+  };
+}
+
+export function webPageSchema(path: string, name: string, description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name,
+    description,
+    url: `https://ybvet.com.au${path}`,
+    isPartOf: {
+      "@type": "WebSite",
+      name: CLINIC.fullName,
+      url: "https://ybvet.com.au",
+    },
   };
 }
 

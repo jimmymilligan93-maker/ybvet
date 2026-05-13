@@ -6,7 +6,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer style={{ background: "var(--dark)", color: "rgba(255,255,255,0.7)" }}>
+    <footer style={{ background: "var(--dark)", color: "rgba(255,255,255,0.88)" }}>
       <div className="container section-pad">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Col 1 — Clinic intro */}
@@ -17,10 +17,10 @@ export default function Footer() {
             >
               YB Vet
             </span>
-            <span className="block text-sm mb-4" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <span className="block text-sm mb-4" style={{ color: "rgba(255,255,255,0.78)" }}>
               Yangebup-Beeliar Vet Clinic
             </span>
-            <p className="text-sm leading-relaxed mb-4">
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.88)" }}>
               Your trusted local vet for dogs and cats across Yangebup, Beeliar, Success, Aubin Grove, and Bibra Lake.
             </p>
             <p className="text-sm font-semibold" style={{ color: "var(--gold)" }}>
@@ -39,7 +39,7 @@ export default function Footer() {
                   <Link
                     href="/services"
                     className="text-sm transition-colors duration-200 hover:text-white"
-                    style={{ color: "rgba(255,255,255,0.6)" }}
+                    style={{ color: "rgba(255,255,255,0.78)" }}
                   >
                     {s.name}
                   </Link>
@@ -60,11 +60,11 @@ export default function Footer() {
               </li>
               <li className="flex gap-3 items-center">
                 <Phone size={15} className="shrink-0" style={{ color: "var(--primary)" }} />
-                <a href={CLINIC.phoneHref} className="hover:text-white transition-colors">{CLINIC.phone}</a>
+                <a href={CLINIC.phoneHref} className="hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.9)" }}>{CLINIC.phone}</a>
               </li>
               <li className="flex gap-3 items-center">
                 <Mail size={15} className="shrink-0" style={{ color: "var(--primary)" }} />
-                <a href={`mailto:${CLINIC.email}`} className="hover:text-white transition-colors">{CLINIC.email}</a>
+                <a href={`mailto:${CLINIC.email}`} className="hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.9)" }}>{CLINIC.email}</a>
               </li>
               <li className="flex gap-3 pt-2">
                 <Clock size={15} className="mt-1 shrink-0" style={{ color: "var(--primary)" }} />
@@ -97,7 +97,7 @@ export default function Footer() {
                   <Link
                     href={l.href}
                     className="transition-colors duration-200 hover:text-white"
-                    style={{ color: "rgba(255,255,255,0.6)" }}
+                    style={{ color: "rgba(255,255,255,0.78)" }}
                   >
                     {l.label}
                   </Link>
@@ -118,7 +118,7 @@ export default function Footer() {
         {/* Copyright */}
         <div
           className="mt-12 pt-6 text-xs text-center"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.35)" }}
+          style={{ borderTop: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.72)" }}
         >
           © {year} {CLINIC.fullName} · ABN [XX XXX XXX XXX] · Veterinary practice licence [XXXXXXXXX]
         </div>

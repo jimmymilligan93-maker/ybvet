@@ -2,8 +2,16 @@
   "name": "ybvet-website",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "chrome >= 111",
+    "edge >= 111",
+    "firefox >= 115",
+    "safari >= 16.4",
+    "ios_saf >= 16.4"
+  ],
   "scripts": {
     "dev": "next dev",
+    "dev:localhost": "next dev -H 127.0.0.1",
     "build": "next build",
     "start": "next start"
   },

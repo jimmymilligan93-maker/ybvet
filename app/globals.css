@@ -231,6 +231,170 @@ em {
 .dark-section em { color: var(--accent); }
 .dark-section p  { color: rgba(255,255,255,0.8); }
 
+/* ── Blog routes + article layout (paw aesthetic + readable measure) ─ */
+.blog-routes {
+  background: linear-gradient(180deg, var(--bg) 0%, #f6fbfd 38%, #ffffff 100%);
+}
+
+.blog-article-shell {
+  isolation: isolate;
+}
+
+.blog-article-paw-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+/* Stronger than default watermarks, but still behind article text (z-index). */
+.blog-article-paw-layer svg.paw-watermark {
+  opacity: 0.14;
+}
+.blog-article-paw-layer svg.paw-gold {
+  opacity: 0.2;
+}
+
+/* Blog post column: one explicit max-width (matches .container) — do not combine
+   `container` + `max-w-*` on the same node; cascade order can make header/hero and
+   body resolve to different effective widths. */
+.blog-article-main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding-inline: 1rem;
+}
+@media (min-width: 768px) {
+  .blog-article-main {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .blog-article-main {
+    padding-inline: 3rem;
+  }
+}
+
+.blog-article-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 2.85rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  color: var(--text);
+}
+
+.blog-article-prose-wrap {
+  width: 100%;
+  padding-inline: 0;
+}
+
+.prose-article {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  min-width: 0;
+  font-size: 1.0625rem;
+  line-height: 1.82;
+  color: var(--text);
+}
+
+.prose-article > p {
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.012em;
+}
+
+.prose-article > p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-article > h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.32rem, 2.8vw, 1.68rem);
+  font-weight: 700;
+  margin-top: 2.85rem;
+  margin-bottom: 1.05rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(14, 143, 224, 0.22);
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.28;
+  scroll-margin-top: 5.5rem;
+}
+
+.prose-article > h2:first-child {
+  margin-top: 0;
+}
+
+.prose-article > ul,
+.prose-article > ol {
+  margin: 1.35rem 0 1.65rem;
+  padding-left: 1.45rem;
+  color: var(--text);
+}
+
+.prose-article li {
+  margin-bottom: 0.55rem;
+  padding-left: 0.2rem;
+}
+
+.prose-article li::marker {
+  color: var(--primary);
+}
+
+.prose-article strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Blog article (Lighthouse: contrast + prose links) ─ */
+.blog-back-link {
+  color: #05405f;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+.blog-back-link:hover {
+  color: #032e45;
+}
+
+.blog-category-pill {
+  background: rgba(6, 84, 127, 0.12);
+  color: #04324d;
+  border: 1px solid rgba(6, 84, 127, 0.28);
+}
+
+.blog-meta-text {
+  color: #3a5161;
+}
+
+.blog-excerpt {
+  color: #3a5161;
+}
+
+.prose-article a {
+  color: #06547f;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+.prose-article a:hover {
+  color: #04324d;
+}
+
+.cta-book-pulse {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  will-change: transform;
+}
+.cta-book-pulse:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(194, 59, 34, 0.35);
+}
+
 /* ── Reduce motion ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

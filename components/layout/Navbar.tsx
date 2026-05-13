@@ -31,11 +31,12 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="sticky top-0 z-40 transition-all duration-300"
+        className="sticky top-0 z-40"
         style={{
-          background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.95)",
-          boxShadow: scrolled ? "0 2px 20px rgba(14,143,224,0.10)" : "0 1px 0 rgba(14,143,224,0.12)",
+          background: scrolled ? "rgba(255,255,255,0.98)" : "rgba(255,255,255,0.95)",
+          boxShadow: "0 1px 0 rgba(14,143,224,0.18)",
           backdropFilter: "blur(8px)",
+          transition: "background-color 0.25s ease-out",
         }}
       >
         <div className="container flex items-center justify-between" style={{ height: 70 }}>

@@ -1,17 +1,34 @@
 import type { Metadata } from "next";
 import { Heart, Shield, Sparkles, Stethoscope, Scissors, Activity, Droplets, Tag } from "lucide-react";
 import { SERVICES, CLINIC } from "@/lib/data";
-import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema, webPageSchema } from "@/lib/schema";
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import PillBadge from "@/components/ui/PillBadge";
 import PawPrint from "@/components/ui/PawPrint";
 import CTAStrip from "@/components/home/CTAStrip";
 
+const pageTitle = "Pet Dental Yangebup — Full Dog & Cat Vet Services";
+const pageDescription =
+  "Pet dental care, scale and polish, and full dog and cat vet services at YB Vet in Yangebup. Serving Beeliar, Success, Aubin Grove & Bibra Lake. Book online or call (08) 9417 2882.";
+
 export const metadata: Metadata = {
-  title: "Veterinary Services",
-  description:
-    "Full-service vet care for dogs and cats in Yangebup — vaccinations, dental, surgery, microchipping, dermatology, and more. Book online or call (08) 9417 2882.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/services" },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: "https://ybvet.com.au/services",
+    type: "website",
+    locale: "en_AU",
+    siteName: CLINIC.fullName,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+  },
+  robots: { index: true, follow: true },
 };
 
 const iconMap: Record<string, React.ElementType> = {
@@ -20,6 +37,16 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 const faqs = [
+  {
+    question: "Do you offer pet dental care and teeth cleaning in Yangebup?",
+    answer:
+      "Yes. YB Vet provides professional dental assessment and dental procedures for dogs and cats, including scale-and-polish under anaesthetic when indicated, plus home-care advice. Book a consultation to have your pet's mouth examined and discuss timing.",
+  },
+  {
+    question: "My dog has bad breath — does that always mean dental disease?",
+    answer:
+      "Often, persistent halitosis is linked to plaque, tartar, or gum disease, but other causes exist. A physical exam lets us narrow it down. If your dog is otherwise unwell or the smell came on suddenly, mention that when you book so we can prioritise what matters.",
+  },
   {
     question: "Do I need an appointment or can I walk in?",
     answer:
@@ -43,8 +70,14 @@ const faqs = [
 ];
 
 export default function ServicesPage() {
+  const webPageLd = webPageSchema("/services", pageTitle, pageDescription);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: "Home", url: "/" }, { name: "Services", url: "/services" }])) }}
@@ -54,18 +87,17 @@ export default function ServicesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
       />
 
-      {/* Hero */}
+      {/* Hero — primary cluster: pet dental Yangebup + full clinic */}
       <section className="section-pad relative overflow-hidden" style={{ background: "var(--primary)" }}>
         <PawPrint size={200} variant="white" style={{ position: "absolute", top: -30, right: -50, transform: "rotate(15deg)", opacity: 0.08 }} />
         <div className="container relative z-10">
           <AnimatedSection>
-            <PillBadge variant="white">Our Services</PillBadge>
+            <PillBadge variant="white">Pet dental &amp; full vet care</PillBadge>
             <h1 className="mt-4 mb-4" style={{ color: "white" }}>
-              Veterinary care for <em style={{ color: "var(--gold)" }}>Yangebup's pets</em>
+              Pet dental in <em style={{ color: "var(--gold)" }}>Yangebup</em> — full services for dogs and cats
             </h1>
             <p className="text-lg max-w-2xl" style={{ color: "rgba(255,255,255,0.85)" }}>
-              Full-service vet care for dogs and cats — from annual vaccinations and dental cleans to surgery and senior care.
-              Everything your pet needs, in one clinic.
+              From dental scale-and-polish and extractions when needed to vaccinations, desexing, surgery, and senior care — one local team at Moorhen Drive for families in Yangebup, Beeliar, Success, Aubin Grove, and Bibra Lake.
             </p>
           </AnimatedSection>
         </div>
@@ -84,7 +116,7 @@ export default function ServicesPage() {
                       <Icon size={22} />
                     </div>
                     <div>
-                      <h3 className="mb-2">{s.name}</h3>
+                      <h3 className="text-lg mb-2" style={{ fontFamily: "var(--font-heading)", color: "var(--text)" }}>{s.name}</h3>
                       <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>{s.desc}</p>
                     </div>
                   </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import PillBadge from "@/components/ui/PillBadge";
@@ -12,14 +13,19 @@ export default function About() {
           {/* Image */}
           <AnimatedSection direction="left">
             <div
-              className="img-placeholder rounded-2xl overflow-hidden"
+              className="rounded-2xl overflow-hidden relative"
               style={{
                 height: 420,
-                background: "linear-gradient(135deg, var(--surface) 0%, var(--border) 100%)",
                 boxShadow: "0 16px 48px rgba(14,143,224,0.10)",
               }}
             >
-              Clinic interior or about photo<br />(replace with real photo)
+              <Image
+                src="https://images.pexels.com/photos/6260665/pexels-photo-6260665.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                alt="Veterinarian reassuring a small dog during a check-up"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </AnimatedSection>
 

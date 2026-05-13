@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { VETS } from "@/lib/data";
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
@@ -25,15 +26,23 @@ export default function Team() {
               <div className="card flex flex-col sm:flex-row gap-6">
                 {/* Portrait */}
                 <div
-                  className="img-placeholder rounded-xl overflow-hidden shrink-0"
+                  className="rounded-xl overflow-hidden shrink-0 relative"
                   style={{
                     width: 120,
                     height: 140,
-                    background: "linear-gradient(135deg, var(--surface) 0%, var(--border) 100%)",
-                    fontSize: 11,
                   }}
                 >
-                  {vet.name.split(" ")[1]}<br />(photo)
+                  <Image
+                    src={
+                      vet.name.includes("Amelia")
+                        ? "https://images.pexels.com/photos/6235231/pexels-photo-6235231.jpeg?auto=compress&cs=tinysrgb&w=700"
+                        : "https://images.pexels.com/photos/6131096/pexels-photo-6131096.jpeg?auto=compress&cs=tinysrgb&w=700"
+                    }
+                    alt={`${vet.name} with a patient`}
+                    fill
+                    sizes="120px"
+                    style={{ objectFit: "cover" }}
+                  />
                 </div>
 
                 {/* Bio */}
