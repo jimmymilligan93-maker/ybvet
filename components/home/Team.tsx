@@ -35,13 +35,13 @@ export default function Team() {
                   <Image
                     src={
                       vet.name.includes("Amelia")
-                        ? "https://images.pexels.com/photos/6235231/pexels-photo-6235231.jpeg?auto=compress&cs=tinysrgb&w=700"
-                        : "https://images.pexels.com/photos/6131096/pexels-photo-6131096.jpeg?auto=compress&cs=tinysrgb&w=700"
+                        ? "https://images.pexels.com/photos/19963166/pexels-photo-19963166.jpeg?auto=compress&cs=tinysrgb&w=700"
+                        : "https://images.pexels.com/photos/6749773/pexels-photo-6749773.jpeg?auto=compress&cs=tinysrgb&w=700"
                     }
                     alt={`${vet.name} with a patient`}
                     fill
                     sizes="120px"
-                    style={{ objectFit: "cover" }}
+                    style={{ objectFit: "cover", objectPosition: "center 32%" }}
                   />
                 </div>
 

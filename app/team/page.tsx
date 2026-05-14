@@ -58,13 +58,13 @@ export default function TeamPage() {
                     <Image
                       src={
                         i === 0
-                          ? "https://images.pexels.com/photos/6235231/pexels-photo-6235231.jpeg?auto=compress&cs=tinysrgb&w=1000"
-                          : "https://images.pexels.com/photos/6131096/pexels-photo-6131096.jpeg?auto=compress&cs=tinysrgb&w=1000"
+                          ? "https://images.pexels.com/photos/19963166/pexels-photo-19963166.jpeg?auto=compress&cs=tinysrgb&w=1000"
+                          : "https://images.pexels.com/photos/6749773/pexels-photo-6749773.jpeg?auto=compress&cs=tinysrgb&w=1000"
                       }
                       alt={`${vet.name} consulting with a pet owner and patient`}
                       fill
                       sizes="240px"
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: "cover", objectPosition: "center 32%" }}
                     />
                   </div>
 
@@ -112,8 +112,8 @@ export default function TeamPage() {
                 style={{ height: 320 }}
               >
                 <Image
-                  src="https://images.pexels.com/photos/6260665/pexels-photo-6260665.jpeg?auto=compress&cs=tinysrgb&w=1400"
-                  alt="Clinic owner in discussion with veterinary team"
+                  src="https://images.pexels.com/photos/6235231/pexels-photo-6235231.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                  alt="Veterinarian with a dog in clinic, representing the hands-on care the YB Vet team delivers"
                   fill
                   sizes="(max-width: 1024px) 100vw, 42vw"
                   style={{ objectFit: "cover" }}

@@ -17,7 +17,7 @@ export default function Footer() {
             >
               YB Vet
             </span>
-            <span className="block text-sm mb-4" style={{ color: "rgba(255,255,255,0.78)" }}>
+            <span className="block text-sm mb-4" style={{ color: "rgba(255,255,255,0.9)" }}>
               Yangebup-Beeliar Vet Clinic
             </span>
             <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.88)" }}>
@@ -39,7 +39,7 @@ export default function Footer() {
                   <Link
                     href="/services"
                     className="text-sm transition-colors duration-200 hover:text-white"
-                    style={{ color: "rgba(255,255,255,0.78)" }}
+                    style={{ color: "rgba(255,255,255,0.92)" }}
                   >
                     {s.name}
                   </Link>
@@ -97,7 +97,7 @@ export default function Footer() {
                   <Link
                     href={l.href}
                     className="transition-colors duration-200 hover:text-white"
-                    style={{ color: "rgba(255,255,255,0.78)" }}
+                    style={{ color: "rgba(255,255,255,0.92)" }}
                   >
                     {l.label}
                   </Link>

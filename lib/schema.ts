@@ -151,3 +151,14 @@ export function faqSchema(faqs: { question: string; answer: string }[]) {
     })),
   };
 }
+
+/** Merge multiple schema.org nodes (each may include @context) into one @graph for a single script tag. */
+export function mergeJsonLdGraph(nodes: Record<string, unknown>[]) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": nodes.map((node) => {
+      const { ["@context"]: _, ...rest } = node;
+      return rest;
+    }),
+  };
+}

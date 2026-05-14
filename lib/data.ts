@@ -28,28 +28,96 @@ export const VETS = [
     title: "Veterinarian",
     credential: "BVSc",
     bio: "Amelia has been caring for Yangebup's pets for over five years. She has a particular love for senior animals and a talent for making nervous dogs feel instantly at ease.",
-    image: "/images/vet-amelia.jpg",
-    alt: "Dr Amelia Barrett, veterinarian at YB Vet, holding a golden retriever",
+    image:
+      "https://images.pexels.com/photos/19963166/pexels-photo-19963166.jpeg?auto=compress&cs=tinysrgb&w=700",
+    alt: "Dr Amelia Barrett, veterinarian at YB Vet — professional portrait",
   },
   {
     name: "Dr Chloe Hutson",
     title: "Veterinarian",
     credential: "BVSc",
     bio: "Chloe's calm hands and unhurried approach have made her the vet cats in particular seem to trust most. She's especially interested in feline medicine and preventive care.",
-    image: "/images/vet-chloe.jpg",
-    alt: "Dr Chloe Hutson, veterinarian at YB Vet, examining a cat",
+    image:
+      "https://images.pexels.com/photos/6749773/pexels-photo-6749773.jpeg?auto=compress&cs=tinysrgb&w=700",
+    alt: "Dr Chloe Hutson, veterinarian at YB Vet, consulting with a pet owner and patient",
   },
 ];
 
-export const SERVICES = [
-  { name: "Vaccinations",    icon: "shield",      desc: "Annual and puppy/kitten vaccination programs tailored to your pet's lifestyle and risk." },
-  { name: "Dental Care",     icon: "sparkles",    desc: "Professional dental cleans, extractions, and home dental advice to protect long-term health." },
-  { name: "Consultations",   icon: "stethoscope", desc: "Thorough, unhurried consultations for illnesses, check-ups, second opinions, and health concerns." },
-  { name: "Senior Pet Care", icon: "heart",       desc: "Specialised health monitoring for dogs and cats over seven — catching issues before they escalate." },
-  { name: "Desexing",        icon: "scissors",    desc: "Safe, routine desexing procedures for dogs and cats with compassionate pre- and post-op care." },
-  { name: "Surgery",         icon: "activity",    desc: "General soft-tissue surgery performed with careful anaesthetic monitoring and pain management." },
-  { name: "Dermatology",     icon: "droplets",    desc: "Diagnosis and management of skin conditions, allergies, and ear disease in dogs and cats." },
-  { name: "Microchipping",   icon: "tag",         desc: "Permanent identification implanted in seconds — and we'll register your pet's details on the spot." },
+/** Homepage + services listing; `icon` kept for /services page icon row. */
+export type ServiceCard = {
+  name: string;
+  icon: string;
+  desc: string;
+  /** Pexels or same-origin URL for homepage service card photo strip. */
+  imageSrc: string;
+  imageAlt: string;
+};
+
+export const SERVICES: ServiceCard[] = [
+  {
+    name: "Vaccinations",
+    icon: "shield",
+    desc: "Annual and puppy/kitten vaccination programs tailored to your pet's lifestyle and risk.",
+    imageSrc:
+      "https://images.pexels.com/photos/36111944/pexels-photo-36111944.jpeg?auto=compress&cs=tinysrgb&w=480",
+    imageAlt: "Veterinarian administering a canine vaccine injection",
+  },
+  {
+    name: "Dental Care",
+    icon: "sparkles",
+    desc: "Professional dental cleans, extractions, and home dental advice to protect long-term health.",
+    imageSrc:
+      "https://images.pexels.com/photos/6235113/pexels-photo-6235113.jpeg?auto=compress&cs=tinysrgb&w=480",
+    imageAlt: "Person gently examining a dog's teeth during a dental check",
+  },
+  {
+    name: "Consultations",
+    icon: "stethoscope",
+    desc: "Thorough, unhurried consultations for illnesses, check-ups, second opinions, and health concerns.",
+    imageSrc:
+      "https://images.pexels.com/photos/6235116/pexels-photo-6235116.jpeg?auto=compress&cs=tinysrgb&w=480",
+    imageAlt: "Small dog on an examination table during a veterinary visit",
+  },
+  {
+    name: "Senior Pet Care",
+    icon: "heart",
+    desc: "Specialised health monitoring for dogs and cats over seven — catching issues before they escalate.",
+    imageSrc:
+      "https://images.pexels.com/photos/6235231/pexels-photo-6235231.jpeg?auto=compress&cs=tinysrgb&w=480",
+    imageAlt: "Veterinarian examining a dog's coat during a skin and wellness check",
+  },
+  {
+    name: "Desexing",
+    icon: "scissors",
+    desc: "Safe, routine desexing procedures for dogs and cats with compassionate pre- and post-op care.",
+    imageSrc:
+      "https://images.pexels.com/photos/6131096/pexels-photo-6131096.jpeg?auto=compress&cs=tinysrgb&w=480",
+    imageAlt: "Veterinarian in clinic gently handling a cat during an examination",
+  },
+  {
+    name: "Surgery",
+    icon: "activity",
+    desc: "General soft-tissue surgery performed with careful anaesthetic monitoring and pain management.",
+    imageSrc:
+      "https://images.pexels.com/photos/7121992/pexels-photo-7121992.jpeg?auto=compress&cs=tinysrgb&w=480",
+    imageAlt: "Dog at a veterinary clinic looking relaxed with staff",
+  },
+  {
+    name: "Dermatology",
+    icon: "droplets",
+    desc: "Diagnosis and management of skin conditions, allergies, and ear disease in dogs and cats.",
+    imageSrc:
+      "https://images.pexels.com/photos/5482555/pexels-photo-5482555.jpeg?auto=compress&cs=tinysrgb&w=480",
+    imageAlt: "Dalmatian dog standing on green grass in natural outdoor light",
+  },
+  {
+    name: "Microchipping",
+    icon: "tag",
+    desc: "Permanent identification implanted in seconds — and we'll register your pet's details on the spot.",
+    imageSrc:
+      "https://images.pexels.com/photos/6001208/pexels-photo-6001208.jpeg?auto=compress&cs=tinysrgb&w=480",
+    imageAlt: "Person gently holding a relaxed cat in their arms",
+  },
 ];
 
 export const TESTIMONIALS = [
@@ -96,6 +164,108 @@ export type BlogPost = {
 };
 
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: "puppy-vaccinations-schedule-australia",
+    title: "Puppy Vaccinations in Australia — Schedules, Core Vaccines, and First Vet Visits",
+    seoTitle: "Puppy Vaccinations — Schedule & Core Vaccines",
+    metaDescription:
+      "Puppy vaccinations protect against parvovirus and distemper. Typical Australian schedules, booster timing, side effects, and when to book YB Vet Yangebup. Call (08) 9417 2882.",
+    excerpt:
+      "If you have just picked up a puppy, vaccinations are probably on your mind alongside sleep, chewing, and where the wee pads went. Here is how Australian puppy courses usually work, what core vaccines cover, and how we plan visits at YB Vet in Yangebup.",
+    category: "Preventive Care",
+    date: "2026-06-15",
+    dateFormatted: "15 June 2026",
+    readTime: "9 min read",
+    author: "Dr Chloe Hutson",
+    coverSrc:
+      "https://images.pexels.com/photos/36111944/pexels-photo-36111944.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    faqs: [
+      {
+        question: "When should a puppy get their first vaccination in Australia?",
+        answer:
+          "Most puppies start their course between six and eight weeks of age, sometimes slightly earlier if a breeder or shelter has already given a first dose. The exact date depends on maternal antibody levels, health, and what is recorded on any paperwork you bring. Your vet spaces boosters so immunity is not left with risky gaps.",
+      },
+      {
+        question: "What is the difference between C3 and C5 puppy vaccines?",
+        answer:
+          "C3 refers to core protection against distemper, infectious hepatitis, and parvovirus. C5 adds components for canine cough, often covering parainfluenza and Bordetella bronchiseptica. Not every puppy needs every non-core component on the same day; lifestyle and local risk guide what we recommend in addition to core vaccines.",
+      },
+      {
+        question: "How long after puppy vaccinations can they go outside?",
+        answer:
+          "Socialisation matters, and so does incomplete immunity. Many owners balance controlled, low-traffic outings with avoiding high dog-traffic areas until the puppy course is finished and your vet confirms timing. Ask us directly for your suburb and your puppy's age rather than relying on generic social media timelines.",
+      },
+      {
+        question: "What side effects are normal after puppy vaccinations?",
+        answer:
+          "A quiet afternoon, mild soreness at the injection site, or a small lump that softens over a few days can occur. True anaphylaxis is rare but urgent. If your puppy collapses, develops facial swelling, or cannot settle after several hours of monitoring, seek emergency veterinary care immediately.",
+      },
+      {
+        question: "Do puppies need vaccinations if they stay indoors?",
+        answer:
+          "Indoor life lowers some risks but does not remove them. Parvovirus can enter homes on shoes and wheels. Core puppy vaccination remains the standard foundation for nearly all dogs in Australia, with non-core vaccines added only when justified by lifestyle.",
+      },
+      {
+        question: "How much do puppy vaccinations cost in Australia?",
+        answer:
+          "Fees vary by clinic, region, and which vaccines and parasite products are included in a visit. We explain what we recommend and what it costs before proceeding so you can make a clear decision. Pet insurance may help some families; others prefer to budget visit by visit.",
+      },
+    ],
+    content: `
+      <p>You have probably had the puppy home for three days, named them, and already Googled whether that sneeze was normal. Somewhere in the same browser history sits the word <strong>puppy vaccinations</strong>. The short answer is: core vaccines protect against diseases that can kill young dogs quickly, and the schedule is built around how maternal antibodies fade and how boosters train the immune system. We see new puppies every week at our Moorhen Drive clinic in Yangebup, and we plan the course around the individual animal, not a one-size-fits-all sticker on the fridge.</p>
+      <p>The longer answer still fits on one page: you are not failing if you feel overwhelmed by dates, acronyms, and conflicting advice from apps, neighbours, and old forum threads. Good puppy vaccination care is mostly steady timing, accurate records, and a clinic that will tell you when something can wait until Tuesday and when it cannot.</p>
+      <p>We are a day clinic with set hours, not a twenty-four-hour emergency hospital. If your puppy is collapsed, non-responsive, or struggling to breathe, your nearest emergency veterinary hospital is the right call. For planning, records, and routine needles, we are here.</p>
+
+      <h2>When your puppy's first vaccinations usually start</h2>
+      <p>Most Australian puppies begin their course between six and eight weeks of age. Some arrive with a sticker in a passport from a breeder or shelter showing an earlier dose. That is useful information rather than a problem: we read what was given, which brand family was used if recorded, and continue the series without unnecessary duplication.</p>
+      <p>Last week a small spaniel cross arrived tucked under a jacket, shaking just enough that the owner apologised five times before we had said hello. The owner worried they had “left it too late” because the internet said eight weeks as if it were a cliff edge. The puppy had had one dose elsewhere, on schedule for that litter. After a floor-level sniff and a treat, we mapped the remaining boosters, talked about worming, weighed the puppy against growth expectations, and sent them home with a written plan on paper rather than a screenshot of a stranger’s opinion. That is the shape of a normal first vaccination visit: calm handling first, medicine second, and a timeline you can stick to on the fridge without second-guessing.</p>
+      <p>If you are still packing the carrier or lead for the very first time, our <a href="/blog/preparing-pet-first-vet-visit">first vet visit guide</a> covers habituation and what to bring. Honest cost conversations matter too: we explain what we recommend and what it costs before we proceed. Surprises help nobody.</p>
+
+      <h2>Core puppy vaccines in Australia — what “C3” means</h2>
+      <p>In everyday Australian clinic language, “C3” usually means core protection against canine distemper virus, canine infectious hepatitis (adenovirus), and canine parvovirus. These are not rare trivia diseases. Parvovirus in particular can devastate unvaccinated puppies within days. National welfare bodies such as <a href="https://www.rspca.org.au/" target="_blank" rel="noopener noreferrer">RSPCA Australia</a> publish owner-facing material on infectious disease and prevention; your own veterinarian still tailors timing to your puppy.</p>
+      <p>Registered vaccines in Australia have labels that describe how they may be used. Your vet chooses products and intervals that align with those labels and with your dog’s risk profile. If you are comparing two clinics online, comparing brand names alone is less useful than comparing whether someone examined your puppy before injecting, whether records are thorough, and whether you left with a clear next date.</p>
+      <p>Non-core components, sometimes discussed as part of a “C5” style protocol, may cover agents involved in canine cough. Whether your puppy benefits on the same schedule depends on boarding plans, daycare, and local disease patterns. The <a href="https://www.ava.com.au/" target="_blank" rel="noopener noreferrer">Australian Veterinary Association</a> hosts vet-authored public information that sits alongside — not instead of — a consult.</p>
+      <p>International specialist groups publish vaccination guideline frameworks for veterinarians worldwide. The <a href="https://wsava.org/global-guidelines/vaccination-guidelines/" target="_blank" rel="noopener noreferrer">WSAVA vaccination guidelines</a> are one reference many Australian vets consider when interpreting label directions and local risk.</p>
+
+      <h2>Typical puppy vaccination schedule and booster gaps</h2>
+      <p>There is no single calendar that fits every litter. Most puppies receive a series of doses weeks apart until they are old enough for the final booster in the primary course. The gap between visits is deliberate: too long leaves a window where protection may be incomplete; too tight is not always useful because maternal antibodies can interfere with early doses.</p>
+      <p>Your vet records the lot, the injection site, and the due date for the next visit. Bring any breeder, shelter, or previous clinic paperwork even if it is a photo on your phone. It saves guessing.</p>
+      <p>If your puppy has been unwell with vomiting or diarrhoea, tell us before you leave home. Live modified vaccines are powerful tools; they are not always given on the same day as a febrile illness. A postponed needle is a small frustration. An inappropriate one is worse.</p>
+      <p>After the puppy course, adult boosters and titre testing (where appropriate) become part of long-term preventive care. Our <a href="/blog/why-annual-vet-checks-matter">article on annual check-ups</a> explains why the yearly consult is about more than a single needle.</p>
+
+      <h2>Breeder passports, rescue intakes, and mixed histories</h2>
+      <p>Some puppies arrive with immaculate paperwork: dates, batch numbers, and the vet clinic stamp. Others arrive with a folded note and sincere best guesses. Both are workable. What slows a visit down is no information at all, so photograph old booklets before they fade.</p>
+      <p>Rescue puppies sometimes have unknown early weeks. We still build a forward plan from the age and weight in front of us, then adjust if new records appear later. If your puppy travelled interstate, mention it: timing of certain parasites and regulatory paperwork can differ from a locally bred litter in Aubin Grove.</p>
+      <p>When histories conflict — for example two “first” doses close together — we prioritise safety and label-consistent spacing rather than rushing a third injection to “catch up” in one afternoon.</p>
+
+      <h2>Heartworm and intestinal worms alongside the vaccine conversation</h2>
+      <p>Vaccination protects against specific viruses and some bacteria; it does not replace worming or heartworm prevention. In Western Australia, heartworm remains a genuine risk for dogs that spend time outdoors, and intestinal worms are common in puppies regardless of how glossy the breeder paperwork looked.</p>
+      <p>We use vaccine visits to weigh your puppy, discuss product choice for their age and size, and set reminders that match how you actually live. Some families prefer monthly chewables; others prefer injectable heartworm prevention paired with a different worming rhythm. The goal is a plan you will follow, not a lecture you forget in the car park.</p>
+
+      <h2>Parasite control, microchipping, and the same appointments</h2>
+      <p>Vaccination visits are also practical checkpoints for intestinal worms, heartworm prevention plans suited to Western Australia, flea and tick control if travel exposes your dog, and microchip confirmation. Bundling does not mean rushing: it means fewer separate car trips for an animal who is still learning that the car sometimes ends somewhere nice.</p>
+      <p>Our <a href="/services">veterinary services</a> page lists vaccinations alongside dentistry, surgery, and consultations so you can see how a puppy’s first year fits into the wider clinic picture.</p>
+
+      <h2>Side effects most owners notice — and the ones that cannot wait</h2>
+      <p>Many puppies sleep heavily for an afternoon after vaccination. Some have a small tender lump at the injection site that resolves over several days. Those findings sit in the “monitor and phone us if worried” basket.</p>
+      <p>The basket that needs an emergency hospital includes sudden collapse, repeated vomiting with lethargy, facial swelling, or breathing difficulty soon after a vaccine. Those signs are uncommon, but they are not wait-until-Monday signs.</p>
+
+      <h2>Socialisation, footpaths, and unfinished vaccine courses</h2>
+      <p>Owners in Beeliar, Success, and Bibra Lake often ask whether they are “allowed” to walk on pavement or meet neighbour dogs before the course finishes. Immunity is not a light switch. Many families practise careful socialisation: carry the puppy to quiet verges, introduce stable, healthy adult dogs belonging to friends, and avoid dog-park mud until the vet confirms the puppy is through the high-risk window for parvovirus.</p>
+      <p>We would rather discuss a realistic plan for your household than hand you a rigid rule copied from a forum.</p>
+      <p>Puppy school run by reward-based trainers who require vaccine records is different from an informal meet-up in a drainage reserve after rain. Ask trainers what hygiene and age rules they use. Good classes often start slightly later than the very first needle; they should still fit inside a sensible socialisation window once your vet agrees.</p>
+
+      <h2>After the puppy course: titre tests, boosters, and the annual rhythm</h2>
+      <p>Once the primary course is complete, conversation shifts from “how many weeks between these doses” to “what does this adult dog need this year.” Some dogs receive triennial core protocols where appropriate; others need annual components because of kennel cough exposure. Titre testing measures antibodies for some diseases and can inform decisions in specific cases. It does not replace physical exams, dental checks, or conversations about weight.</p>
+      <p>If you are unsure what your adult dog is due for after moving suburbs, bring the old booklet. We reconcile the history, then align forward dates with what you can realistically attend given work and school runs.</p>
+
+      <h2>What puppy vaccination looks like at YB Vet</h2>
+      <p>We examine before we vaccinate: heart, lungs, weight trend, hydration, and whether the day is the right day for a needle if your puppy has a fever or diarrhoea. Nurses and vets step through consent in plain language. You can read about <a href="/team">who works clinically</a> before you arrive.</p>
+      <p>Yangebup-Beeliar Vet Clinic holds a Google rating of 4.9 from 155 client reviews. That figure reflects trust built in small moments — clear plans, gentle handling — as much as any single clinical skill.</p>
+      <p>When you are ready to book the next step in your puppy’s preventive care, use Vetstoria from our <a href="/contact">contact page</a> or call (08) 9417 2882. Monday to Friday we are open 8:30am–5:30pm; Saturday mornings until midday. Sunday we are closed.</p>
+      <p>If you want more owner-focused reading after this piece, browse the rest of our <a href="/blog">pet care resources</a> — dental articles, wellness guides, and first-visit tips live there together.</p>
+    `,
+  },
   {
     slug: "why-annual-vet-checks-matter",
     title: "Why Annual Vet Check-Ups Are the Most Valuable Thing You Can Do for Your Pet",
@@ -240,7 +410,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     author: "Dr Amelia Barrett",
     coverSrc:
-      "https://images.pexels.com/photos/6235231/pexels-photo-6235231.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "https://images.pexels.com/photos/6235113/pexels-photo-6235113.jpeg?auto=compress&cs=tinysrgb&w=1400",
     faqs: [
       {
         question: "Is bad breath in dogs ever normal?",

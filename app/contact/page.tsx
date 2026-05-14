@@ -150,7 +150,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Clinic exterior photo */}
+              {/* Clinic care photo */}
               <div
                 className="rounded-2xl overflow-hidden relative"
                 style={{
@@ -158,8 +158,8 @@ export default function ContactPage() {
                 }}
               >
                 <Image
-                  src="https://images.pexels.com/photos/6260665/pexels-photo-6260665.jpeg?auto=compress&cs=tinysrgb&w=1400"
-                  alt="Friendly veterinary consultation room"
+                  src="https://images.pexels.com/photos/6235118/pexels-photo-6235118.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                  alt="Veterinarian examining a small dog during a friendly consultation"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   style={{ objectFit: "cover" }}

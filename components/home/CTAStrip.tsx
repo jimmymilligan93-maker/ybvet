@@ -7,7 +7,11 @@ export default function CTAStrip() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ background: "var(--primary)", paddingBlock: "5rem" }}
+      style={{
+        /* Darker than --primary so white text meets WCAG AA on body + outline phone CTA */
+        background: "linear-gradient(180deg, #0a6ec4 0%, #045a94 100%)",
+        paddingBlock: "5rem",
+      }}
     >
       <PawPrint size={200} variant="white" style={{ position: "absolute", top: -40, right: -40, transform: "rotate(20deg)", opacity: 0.1 }} />
       <PawPrint size={130} variant="white" style={{ position: "absolute", bottom: -20, left: 40, transform: "rotate(-15deg)", opacity: 0.1 }} />
@@ -16,7 +20,7 @@ export default function CTAStrip() {
         <h2 className="mb-3" style={{ color: "white" }}>
           Ready to book?
         </h2>
-        <p className="mb-8 text-lg" style={{ color: "rgba(255,255,255,0.92)", maxWidth: 520, margin: "0 auto 2rem" }}>
+        <p className="mb-8 text-lg" style={{ color: "#ffffff", maxWidth: 520, margin: "0 auto 2rem" }}>
           Open Monday–Friday 8:30am–5:30pm and Saturday 8:30am–12:00pm. New patients always welcome.
         </p>
 

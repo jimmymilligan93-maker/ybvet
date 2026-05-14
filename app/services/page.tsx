@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Heart, Shield, Sparkles, Stethoscope, Scissors, Activity, Droplets, Tag } from "lucide-react";
+import Image from "next/image";
 import { SERVICES, CLINIC } from "@/lib/data";
-import { breadcrumbSchema, faqSchema, webPageSchema } from "@/lib/schema";
-import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
+import { breadcrumbSchema, faqSchema, mergeJsonLdGraph, webPageSchema } from "@/lib/schema";
 import PillBadge from "@/components/ui/PillBadge";
 import PawPrint from "@/components/ui/PawPrint";
 import CTAStrip from "@/components/home/CTAStrip";
@@ -22,18 +21,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_AU",
     siteName: CLINIC.fullName,
+    images: [
+      {
+        url: "/images/happydog.webp",
+        width: 1200,
+        height: 800,
+        alt: "Happy dog — YB Vet veterinary services in Yangebup",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: pageTitle,
     description: pageDescription,
+    images: ["/images/happydog.webp"],
   },
   robots: { index: true, follow: true },
-};
-
-const iconMap: Record<string, React.ElementType> = {
-  shield: Shield, sparkles: Sparkles, stethoscope: Stethoscope, heart: Heart,
-  scissors: Scissors, activity: Activity, droplets: Droplets, tag: Tag,
 };
 
 const faqs = [
@@ -70,85 +73,104 @@ const faqs = [
 ];
 
 export default function ServicesPage() {
-  const webPageLd = webPageSchema("/services", pageTitle, pageDescription);
+  const serviceJsonLd = mergeJsonLdGraph([
+    webPageSchema("/services", pageTitle, pageDescription) as Record<string, unknown>,
+    breadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Services", url: "/services" },
+    ]) as Record<string, unknown>,
+    faqSchema(faqs) as Record<string, unknown>,
+  ]);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: "Home", url: "/" }, { name: "Services", url: "/services" }])) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
-      />
-
-      {/* Hero — primary cluster: pet dental Yangebup + full clinic */}
-      <section className="section-pad relative overflow-hidden" style={{ background: "var(--primary)" }}>
-        <PawPrint size={200} variant="white" style={{ position: "absolute", top: -30, right: -50, transform: "rotate(15deg)", opacity: 0.08 }} />
-        <div className="container relative z-10">
-          <AnimatedSection>
+      {/* Hero — no client motion: visible on first paint for LCP (text stays LCP on mobile). */}
+      <section
+        className="services-hero-lcp services-hero-tight section-pad relative overflow-hidden"
+        style={{
+          background: "linear-gradient(180deg, var(--secondary) 0%, #043d5c 100%)",
+        }}
+      >
+        <PawPrint size={140} variant="white" style={{ position: "absolute", top: -24, right: -40, transform: "rotate(15deg)", opacity: 0.06 }} />
+        <div className="container relative z-10 services-hero-grid">
+          <h1 className="services-hero-title" style={{ color: "#ffffff" }}>
+            Complete veterinary care in Yangebup — everything your pet needs, close to home.
+          </h1>
+          <p className="services-hero-lead max-w-2xl" style={{ color: "#EAF6FD" }}>
+            From routine vaccinations to complex surgery — comprehensive veterinary care for dogs, cats and small animals across Yangebup, Beeliar, Success, Aubin Grove, and Bibra Lake.
+          </p>
+          <div className="services-hero-pill">
             <PillBadge variant="white">Pet dental &amp; full vet care</PillBadge>
-            <h1 className="mt-4 mb-4" style={{ color: "white" }}>
-              Pet dental in <em style={{ color: "var(--gold)" }}>Yangebup</em> — full services for dogs and cats
-            </h1>
-            <p className="text-lg max-w-2xl" style={{ color: "rgba(255,255,255,0.85)" }}>
-              From dental scale-and-polish and extractions when needed to vaccinations, desexing, surgery, and senior care — one local team at Moorhen Drive for families in Yangebup, Beeliar, Success, Aubin Grove, and Bibra Lake.
-            </p>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
 
-      {/* Services grid */}
-      <section className="section-pad" style={{ background: "var(--bg)" }}>
+      {/* Services grid — static markup so card images decode without whileInView / hydration delay */}
+      <section className="section-pad services-route-grid" style={{ background: "var(--bg)" }} aria-labelledby="services-grid-heading">
         <div className="container">
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6" stagger={0.08}>
-            {SERVICES.map((s) => {
-              const Icon = iconMap[s.icon] ?? Heart;
-              return (
-                <StaggerItem key={s.name}>
-                  <div className="card flex gap-5">
-                    <div className="service-icon shrink-0">
-                      <Icon size={22} />
-                    </div>
-                    <div>
-                      <h3 className="text-lg mb-2" style={{ fontFamily: "var(--font-heading)", color: "var(--text)" }}>{s.name}</h3>
-                      <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>{s.desc}</p>
-                    </div>
-                  </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
+          <h2 id="services-grid-heading" className="mb-8 text-center md:text-left">
+            Our veterinary services
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {SERVICES.map((s) => (
+              <div key={s.name} className="card flex h-full flex-col overflow-hidden p-0">
+                <div className="relative h-[120px] w-full shrink-0 overflow-hidden rounded-t-xl">
+                  <Image
+                    src={s.imageSrc}
+                    alt={s.imageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center"
+                    loading="lazy"
+                    decoding="async"
+                    quality={72}
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-lg mb-2" style={{ color: "var(--text)" }}>
+                    {s.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                    {s.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="section-pad" style={{ background: "white" }}>
+      <section className="section-pad services-route-grid" style={{ background: "white" }} aria-labelledby="faq-heading">
         <div className="container max-w-3xl mx-auto">
-          <AnimatedSection className="text-center mb-10">
+          <div className="text-center mb-10">
             <PillBadge>Common questions</PillBadge>
-            <h2 className="mt-4">Frequently asked questions</h2>
-          </AnimatedSection>
+            <h2 id="faq-heading" className="mt-4">
+              Frequently asked questions
+            </h2>
+          </div>
 
-          <StaggerContainer className="space-y-4" stagger={0.1}>
+          <div className="space-y-4">
             {faqs.map((f) => (
-              <StaggerItem key={f.question}>
-                <div className="card">
-                  <h3 className="text-base font-bold mb-2" style={{ fontFamily: "var(--font-heading)", color: "var(--text)" }}>{f.question}</h3>
-                  <p className="text-sm" style={{ color: "var(--muted)" }}>{f.answer}</p>
-                </div>
-              </StaggerItem>
+              <div key={f.question} className="card">
+                <h3 className="text-base font-bold mb-2" style={{ color: "var(--text)" }}>
+                  {f.question}
+                </h3>
+                <p className="text-sm" style={{ color: "var(--muted)" }}>
+                  {f.answer}
+                </p>
+              </div>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
       </section>
 
       <CTAStrip />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
     </>
   );
 }

@@ -1,23 +1,10 @@
 import Link from "next/link";
-import {
-  Shield, Sparkles, Stethoscope, Heart,
-  Scissors, Activity, Droplets, Tag, ArrowRight,
-} from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { SERVICES } from "@/lib/data";
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import PillBadge from "@/components/ui/PillBadge";
 import PawPrint from "@/components/ui/PawPrint";
-
-const iconMap: Record<string, React.ElementType> = {
-  shield:      Shield,
-  sparkles:    Sparkles,
-  stethoscope: Stethoscope,
-  heart:       Heart,
-  scissors:    Scissors,
-  activity:    Activity,
-  droplets:    Droplets,
-  tag:         Tag,
-};
 
 export default function ServicesGrid() {
   return (
@@ -37,22 +24,27 @@ export default function ServicesGrid() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
           stagger={0.08}
         >
-          {SERVICES.map((s) => {
-            const Icon = iconMap[s.icon] ?? Heart;
-            return (
-              <StaggerItem key={s.name}>
-                <div className="card card-surface h-full">
-                  <div className="service-icon mb-4">
-                    <Icon size={22} />
-                  </div>
+          {SERVICES.map((s) => (
+            <StaggerItem key={s.name}>
+              <div className="card card-surface flex h-full flex-col overflow-hidden p-0">
+                <div className="relative h-20 w-full shrink-0 overflow-hidden rounded-t-xl">
+                  <Image
+                    src={s.imageSrc}
+                    alt={s.imageAlt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover object-center"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
                   <h3 className="mb-2 text-base font-bold" style={{ fontFamily: "var(--font-heading)" }}>
                     {s.name}
                   </h3>
                   <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>{s.desc}</p>
                 </div>
-              </StaggerItem>
-            );
-          })}
+              </div>
+            </StaggerItem>
+          ))}
         </StaggerContainer>
 
         <AnimatedSection className="text-center mt-10" delay={0.2}>

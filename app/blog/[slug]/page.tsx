@@ -53,8 +53,9 @@ export default async function BlogPostPage({ params }: Props) {
   const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) notFound();
 
+  /* Slightly smaller remote width = faster LCP decode on slow networks; Next still serves responsive sizes. */
   const heroSrc =
-    post.coverSrc.includes("w=") ? post.coverSrc.replace(/w=\d+/, "w=960") : `${post.coverSrc}&w=960`;
+    post.coverSrc.includes("w=") ? post.coverSrc.replace(/w=\d+/, "w=720") : `${post.coverSrc}&w=720`;
 
   const authorVet = VETS.find((v) => post.author.includes(v.name.replace(/^Dr\s+/, "")));
   const authorPhoto = authorVet?.image ?? "/images/vet-amelia.jpg";
@@ -158,6 +159,22 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
 
             <h1 className="blog-article-title mb-6">{post.title}</h1>
+
+            <div className="blog-article-hero relative w-full mb-8 md:mb-10">
+              <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-[0_20px_50px_-12px_rgba(14,143,224,0.25)] ring-1 ring-[rgba(14,143,224,0.18)]">
+                <Image
+                  src={heroSrc}
+                  alt={`Cover image for article: ${post.title}`}
+                  fill
+                  priority
+                  fetchPriority="high"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
+                  className="object-cover"
+                  quality={78}
+                />
+              </div>
+            </div>
+
             <p className="text-lg md:text-xl leading-relaxed mb-10 blog-excerpt">{post.excerpt}</p>
 
             <div className="flex items-center gap-4 pb-8 mb-2" style={{ borderBottom: "1px solid var(--border)" }}>
@@ -184,21 +201,6 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             </div>
           </header>
-
-          <div className="blog-article-hero relative w-full mb-12 md:mb-16">
-            <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-[0_20px_50px_-12px_rgba(14,143,224,0.25)] ring-1 ring-[rgba(14,143,224,0.18)]">
-              <Image
-                src={heroSrc}
-                alt={`Cover image for article: ${post.title}`}
-                fill
-                priority
-                fetchPriority="high"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
-                className="object-cover"
-                quality={78}
-              />
-            </div>
-          </div>
 
           <div className="blog-article-prose-wrap">
             <div className="prose-article w-full max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />

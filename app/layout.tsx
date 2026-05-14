@@ -12,6 +12,7 @@ const nunito = Nunito({
   weight: ["400", "600", "700"],
   variable: "--font-heading",
   display: "swap",
+  adjustFontFallback: true,
 });
 
 const dmSans = DM_Sans({
@@ -19,6 +20,7 @@ const dmSans = DM_Sans({
   weight: ["400", "500"],
   variable: "--font-body",
   display: "swap",
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -41,7 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-AU" className={`${nunito.variable} ${dmSans.variable}`}>
       <head>
-        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />
         <script
           type="application/ld+json"

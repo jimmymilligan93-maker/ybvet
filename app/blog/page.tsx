@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/data";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
@@ -9,10 +9,16 @@ import PillBadge from "@/components/ui/PillBadge";
 import PawPrint from "@/components/ui/PawPrint";
 import SiteBreadcrumbs from "@/components/seo/SiteBreadcrumbs";
 
+/** Newest `date` first (ISO strings sort lexicographically). */
+const blogPostsByDateDesc = [...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date));
+
 const BLOG_INDEX_DESCRIPTION =
   "Practical pet care from YB Vet in Yangebup — dental health, bad breath, first visits, and wellness for dogs and cats in Beeliar, Success, Aubin Grove & Bibra Lake.";
 
-const blogOgImage = BLOG_POSTS[0]!.coverSrc.replace(/w=\d+/, "w=1200");
+const blogOgImage = blogPostsByDateDesc[0]!.coverSrc.replace(/w=\d+/, "w=1200");
+
+const BLOG_HERO_IMAGE =
+  "https://images.pexels.com/photos/8939264/pexels-photo-8939264.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
 export const metadata: Metadata = {
   title: "Pet Care Blog — Dental, Wellness & Vet Tips in Yangebup",
@@ -50,21 +56,41 @@ export default function BlogPage() {
         }}
       />
 
-      {/* Hero — paw marks match article pages */}
-      <section className="section-pad relative overflow-hidden" style={{ background: "var(--bg)" }}>
+      {/* Hero — copy left; Pexels image right (homepage-style framed photo) */}
+      <section className="relative overflow-x-hidden py-16 md:py-20" style={{ background: "var(--bg)" }}>
         <PawPrint size={168} style={{ position: "absolute", top: 24, right: 56, transform: "rotate(20deg)" }} />
         <PawPrint size={120} variant="gold" style={{ position: "absolute", bottom: 32, left: 20, transform: "rotate(-18deg)" }} />
         <div className="container relative z-10">
-          <AnimatedSection>
-            <PillBadge>Pet Care Resources</PillBadge>
-            <h1 className="mt-4 mb-4">
-              Advice from <em>your local vets</em>
-            </h1>
-            <p className="text-lg max-w-xl" style={{ color: "var(--muted)" }}>
-              Practical, honest pet care information from the team at YB Vet — written for
-              dog and cat owners in Yangebup and the surrounding suburbs.
-            </p>
-          </AnimatedSection>
+          <div
+            className="flex min-h-0 flex-col gap-10
+              lg:grid lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-stretch lg:gap-12 xl:gap-16"
+          >
+            <AnimatedSection>
+              <PillBadge>Pet Care Resources</PillBadge>
+              <h1 className="mt-4 mb-4">
+                Advice from <em>your local vets</em>
+              </h1>
+              <p className="text-lg max-w-xl" style={{ color: "var(--muted)" }}>
+                Practical, honest pet care information from the team at YB Vet — written for
+                dog and cat owners in Yangebup and the surrounding suburbs.
+              </p>
+            </AnimatedSection>
+            <div
+              className="relative min-h-0 w-full shrink-0 overflow-hidden rounded-2xl aspect-video
+                shadow-[0_28px_60px_-16px_rgba(14,143,224,0.28)] ring-1 ring-[rgba(14,143,224,0.14)]
+                lg:aspect-auto lg:h-full"
+            >
+              <Image
+                src={BLOG_HERO_IMAGE}
+                alt="Dog looking up beside a person using a laptop"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover"
+                style={{ objectPosition: "48% 42%" }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -89,9 +115,12 @@ export default function BlogPage() {
             .
           </p>
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12" stagger={0.12}>
-            {BLOG_POSTS.map((post, index) => (
+            {blogPostsByDateDesc.map((post, index) => (
               <StaggerItem key={post.slug}>
-                <article className="card h-full flex flex-col">
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="card group flex h-full flex-col no-underline text-inherit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2"
+                >
                   <div className="rounded-xl mb-6 overflow-hidden relative aspect-[16/10] max-h-[220px] ring-1 ring-[rgba(14,143,224,0.12)]">
                     <Image
                       src={post.coverSrc.replace("w=1400", "w=900")}
@@ -119,18 +148,18 @@ export default function BlogPage() {
                     </span>
                   </div>
 
-                  <h2 className="text-xl mb-4 font-bold leading-snug tracking-tight" style={{ fontFamily: "var(--font-heading)", color: "var(--text)" }}>
+                  <h2
+                    className="text-xl mb-4 font-bold leading-snug tracking-tight underline-offset-2 group-hover:underline"
+                    style={{ fontFamily: "var(--font-heading)", color: "var(--primary)" }}
+                  >
                     {post.title}
                   </h2>
                   <p className="text-[15px] leading-relaxed mb-6 flex-1 blog-excerpt">{post.excerpt}</p>
 
-                  <div className="flex items-center justify-between mt-auto pt-5" style={{ borderTop: "1px solid var(--border)" }}>
+                  <div className="mt-auto pt-5" style={{ borderTop: "1px solid var(--border)" }}>
                     <span className="text-xs font-semibold" style={{ color: "var(--primary)" }}>{post.author}</span>
-                    <Link href={`/blog/${post.slug}`} className="btn btn-secondary text-sm" style={{ padding: "0.4rem 1rem" }}>
-                      Read more <ArrowRight size={14} />
-                    </Link>
                   </div>
-                </article>
+                </Link>
               </StaggerItem>
             ))}
           </StaggerContainer>

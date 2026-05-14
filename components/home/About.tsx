@@ -8,29 +8,32 @@ export default function About() {
   return (
     <section className="section-pad" style={{ background: "white" }}>
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 items-center">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[5fr_7fr] lg:gap-16 lg:items-stretch">
 
-          {/* Image */}
-          <AnimatedSection direction="left">
+          {/* Image — fills column; crop centred on woman + dog (Pexels 7752806) */}
+          <AnimatedSection direction="left" className="min-w-0 lg:h-full">
             <div
-              className="rounded-2xl overflow-hidden relative"
+              className="about-home-photo relative w-full overflow-hidden rounded-2xl
+                min-h-[min(85vw,20rem)] h-[clamp(18rem,58vw,26rem)]
+                max-h-[min(78vh,32rem)] sm:max-h-[28rem]
+                lg:h-full lg:min-h-[26rem] lg:max-h-none"
               style={{
-                height: 420,
                 boxShadow: "0 16px 48px rgba(14,143,224,0.10)",
               }}
             >
               <Image
-                src="https://images.pexels.com/photos/6260665/pexels-photo-6260665.jpeg?auto=compress&cs=tinysrgb&w=1400"
-                alt="Veterinarian reassuring a small dog during a check-up"
+                src="https://images.pexels.com/photos/7752806/pexels-photo-7752806.jpeg?auto=compress&cs=tinysrgb&w=1920"
+                alt="Smiling woman with her dog sitting together at a table — a warm, friendly moment"
                 fill
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                style={{ objectFit: "cover" }}
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover"
+                style={{ objectPosition: "center center" }}
               />
             </div>
           </AnimatedSection>
 
           {/* Text */}
-          <AnimatedSection direction="right" delay={0.1}>
+          <AnimatedSection direction="right" delay={0.1} className="flex flex-col justify-center min-w-0 lg:min-h-0">
             <PillBadge>About YB Vet</PillBadge>
             <h2 className="mt-4 mb-6">
               The same care. <em>Fresh dedication.</em>

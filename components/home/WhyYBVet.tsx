@@ -66,19 +66,30 @@ export default function WhyYBVet() {
 
           {/* Circular photo composition */}
           <AnimatedSection direction="right" className="relative hidden lg:block" style={{ height: 440 }}>
-            {/* Decorative arc */}
+            {/* Back circle — rabbits on grass */}
             <div
-              className="absolute rounded-full pointer-events-none"
+              className="pointer-events-none absolute overflow-hidden rounded-full"
               style={{
                 width: 380,
                 height: 380,
-                background: "rgba(14,143,224,0.06)",
                 top: -40,
                 right: -60,
+                zIndex: 0,
               }}
               aria-hidden="true"
-            />
-            {/* Main circle */}
+            >
+              <Image
+                src="https://images.pexels.com/photos/36175999/pexels-photo-36175999.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt=""
+                fill
+                sizes="380px"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "56% 52%",
+                }}
+              />
+            </div>
+            {/* Main circle — parrot, crop on face and upper body */}
             <div
               className="rounded-full overflow-hidden absolute relative"
               style={{
@@ -91,11 +102,14 @@ export default function WhyYBVet() {
               }}
             >
               <Image
-                src="https://images.pexels.com/photos/4453157/pexels-photo-4453157.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                alt="Veterinarian smiling with a dog during an exam"
+                src="https://images.pexels.com/photos/37438784/pexels-photo-37438784.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Vibrant green parrot on a cage outdoors"
                 fill
                 sizes="280px"
-                style={{ objectFit: "cover" }}
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center 42%",
+                }}
               />
             </div>
             {/* Secondary circle */}
@@ -112,11 +126,14 @@ export default function WhyYBVet() {
               }}
             >
               <Image
-                src="https://images.pexels.com/photos/6131096/pexels-photo-6131096.jpeg?auto=compress&cs=tinysrgb&w=900"
-                alt="Veterinarian handling a calm cat in clinic"
+                src="https://images.pexels.com/photos/17510905/pexels-photo-17510905.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Child gently holding a small kitten, face and ears visible"
                 fill
                 sizes="200px"
-                style={{ objectFit: "cover" }}
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center 30%",
+                }}
               />
             </div>
           </AnimatedSection>
