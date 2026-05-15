@@ -42,6 +42,33 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
+.site-header {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 0 rgba(14, 143, 224, 0.18);
+  backdrop-filter: blur(8px);
+}
+
+html.site-header-scrolled .site-header {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.site-mobile-nav__trigger::-webkit-details-marker {
+  display: none;
+}
+
+.site-mobile-nav__icon {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  box-shadow: 0 -7px 0 currentColor, 0 7px 0 currentColor;
+}
+
+.site-mobile-nav[open] .site-mobile-nav__panel {
+  display: flex;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -149,6 +176,242 @@ em {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.125rem;
   line-height: 1.65;
+}
+
+/* Service landing — full-bleed photo + hero-wide blue→transparent overlay */
+.service-split-hero {
+  --hero-bg-top: var(--secondary);
+  --hero-bg-bottom: #043d5c;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--hero-bg-top) 0%, var(--hero-bg-bottom) 100%);
+  min-height: 0;
+}
+
+.service-split-hero__layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+}
+
+/* Mobile: copy first so H1 is LCP; photo loads below without blocking paint. */
+.service-split-hero__copy {
+  order: 1;
+}
+
+.service-split-hero__fade {
+  display: none;
+}
+
+.service-split-hero__media {
+  display: none;
+}
+
+/* Mirror hero photo (same as vaccinations template); object-position pairs with the flip. */
+.service-split-hero__media .service-split-hero__photo,
+.service-split-hero__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 78% center;
+  transform: scaleX(-1);
+}
+
+@media (min-width: 768px) {
+  .service-split-hero {
+    min-height: clamp(20rem, 38vw, 28rem);
+  }
+
+  .service-split-hero__layout {
+    display: block;
+    min-height: inherit;
+  }
+
+  .service-split-hero__fade {
+    display: block;
+  }
+
+  .service-split-hero__media {
+    display: block;
+    position: absolute;
+    inset: 0;
+    order: unset;
+    height: auto;
+  }
+
+  .service-split-hero__media .service-split-hero__photo,
+  .service-split-hero__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1);
+    object-position: 78% center;
+  }
+}
+
+/* Full-hero overlay: solid blue to 45%, soft fade to transparent by 65% */
+.service-split-hero__fade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    var(--hero-bg-bottom) 0%,
+    var(--hero-bg-bottom) 45%,
+    transparent 65%
+  );
+}
+
+.service-split-hero__copy {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: inherit;
+  overflow: visible;
+  background: linear-gradient(180deg, var(--hero-bg-top) 0%, var(--hero-bg-bottom) 100%);
+  padding: clamp(2.25rem, 7vw, 4.5rem) 1rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .service-split-hero__copy {
+    order: unset;
+    width: min(62%, 44rem);
+    min-height: 100%;
+    background: transparent;
+    padding: clamp(3.5rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem) clamp(3.5rem, 6vw, 5rem)
+      clamp(1.5rem, 5vw, 4.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-split-hero__copy {
+    padding-inline: 3rem 4.5rem;
+  }
+}
+
+.service-split-hero__copy-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.service-split-hero .services-hero-grid {
+  margin-top: 0.85rem;
+}
+
+.service-split-hero .blog-meta-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.service-split-hero .blog-meta-text a {
+  color: #b8dff5;
+}
+.service-split-hero .blog-meta-text a:hover {
+  color: #ffffff;
+}
+.service-split-hero .blog-meta-text span[aria-current="page"] {
+  color: #eaf6fd;
+}
+
+.service-split-hero .services-hero-pill .pill-badge {
+  font-size: 13px;
+  padding: 6px 16px;
+}
+
+.service-split-hero .services-hero-title {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2.15rem, 8vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+}
+
+@media (min-width: 960px) {
+  .service-split-hero .services-hero-title {
+    white-space: nowrap;
+  }
+}
+
+.service-split-hero .services-hero-lead {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  max-width: none;
+}
+
+@media (max-width: 767px) {
+  /* Lead is in the first body section; keeps mobile LCP on the H1. */
+  .service-split-hero .services-hero-lead {
+    display: none;
+  }
+
+}
+
+/* Service body — blog-matched typography (nested section HTML) */
+.service-landing-body.prose-article > section:not(:first-child) {
+  margin-top: 4.25rem;
+}
+
+.service-landing-body.prose-article h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.32rem, 2.8vw, 1.68rem);
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1.75rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 2px solid rgba(14, 143, 224, 0.22);
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.28;
+  scroll-margin-top: 5.5rem;
+}
+
+.service-landing-body.prose-article p {
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.012em;
+}
+
+.service-landing-body.prose-article section > div > p:last-child {
+  margin-bottom: 0;
+}
+
+.service-landing-body.prose-article ul,
+.service-landing-body.prose-article ol {
+  margin: 1.35rem 0 1.65rem;
+  padding-left: 1.45rem;
+  color: var(--text);
+}
+
+.service-landing-body.prose-article li {
+  margin-bottom: 0.55rem;
+  padding-left: 0.2rem;
+}
+
+.service-landing-body.prose-article li::marker {
+  color: var(--primary);
+}
+
+.service-landing-body.prose-article strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.service-landing-body.prose-article a {
+  color: #06547f;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+
+.service-landing-body.prose-article a:hover {
+  color: #04324d;
 }
 
 /* ── Buttons ────────────────────────────────────────── */
@@ -284,6 +547,11 @@ em {
 
 .blog-article-shell {
   isolation: isolate;
+}
+
+.service-landing-body {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 .blog-article-paw-layer {

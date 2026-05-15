@@ -120,7 +120,7 @@ export default function Footer() {
           className="mt-12 pt-6 text-xs text-center"
           style={{ borderTop: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.72)" }}
         >
-          © {year} {CLINIC.fullName} · ABN [XX XXX XXX XXX] · Veterinary practice licence [XXXXXXXXX]
+          © {year} {CLINIC.fullName}
         </div>
       </div>
     </footer>

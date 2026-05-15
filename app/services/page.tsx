@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { SERVICES, CLINIC } from "@/lib/data";
 import { breadcrumbSchema, faqSchema, mergeJsonLdGraph, webPageSchema } from "@/lib/schema";
 import PillBadge from "@/components/ui/PillBadge";
@@ -84,7 +85,6 @@ export default function ServicesPage() {
 
   return (
     <>
-      {/* Hero — no client motion: visible on first paint for LCP (text stays LCP on mobile). */}
       <section
         className="services-hero-lcp services-hero-tight section-pad relative overflow-hidden"
         style={{
@@ -105,42 +105,53 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services grid — static markup so card images decode without whileInView / hydration delay */}
       <section className="section-pad services-route-grid" style={{ background: "var(--bg)" }} aria-labelledby="services-grid-heading">
         <div className="container">
           <h2 id="services-grid-heading" className="mb-8 text-center md:text-left">
             Our veterinary services
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {SERVICES.map((s) => (
-              <div key={s.name} className="card flex h-full flex-col overflow-hidden p-0">
-                <div className="relative h-[120px] w-full shrink-0 overflow-hidden rounded-t-xl">
-                  <Image
-                    src={s.imageSrc}
-                    alt={s.imageAlt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 480px"
-                    className="object-cover object-center"
-                    loading="lazy"
-                    decoding="async"
-                    quality={72}
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-lg mb-2" style={{ color: "var(--text)" }}>
-                    {s.name}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                    {s.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
+            {SERVICES.map((s) => {
+              const href = s.slug ? `/services/${s.slug}` : null;
+
+              return (
+                <article key={s.name} className="card flex h-full flex-col overflow-hidden p-0">
+                  <div className="relative h-[120px] w-full shrink-0 overflow-hidden rounded-t-xl">
+                    <Image
+                      src={s.imageSrc}
+                      alt={s.imageAlt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 480px"
+                      className="object-cover object-center"
+                      loading="lazy"
+                      decoding="async"
+                      quality={75}
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="text-lg mb-2" style={{ color: "var(--text)" }}>
+                      {s.name}
+                    </h3>
+                    <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--muted)" }}>
+                      {s.desc}
+                    </p>
+                    {href ? (
+                      <Link
+                        href={href}
+                        className="btn btn-primary mt-5 text-sm inline-flex self-start"
+                        style={{ padding: "0.5rem 1.25rem" }}
+                      >
+                        Learn more
+                      </Link>
+                    ) : null}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
       <section className="section-pad services-route-grid" style={{ background: "white" }} aria-labelledby="faq-heading">
         <div className="container max-w-3xl mx-auto">
           <div className="text-center mb-10">

@@ -2,7 +2,7 @@ export const CLINIC = {
   name: "YB Vet",
   fullName: "Yangebup-Beeliar Vet Clinic",
   phone: "(08) 9417 2882",
-  phoneHref: "tel:0894172882",
+  phoneHref: "tel:+61894172882",
   email: "info@ybvet.com.au",
   address: "Shop 4/31-35 Moorhen Drive, Yangebup WA 6164",
   suburb: "Yangebup",
@@ -48,6 +48,8 @@ export type ServiceCard = {
   name: string;
   icon: string;
   desc: string;
+  /** When set, the services hub links to `/services/{slug}`. */
+  slug?: string;
   /** Pexels or same-origin URL for homepage service card photo strip. */
   imageSrc: string;
   imageAlt: string;
@@ -57,6 +59,7 @@ export const SERVICES: ServiceCard[] = [
   {
     name: "Vaccinations",
     icon: "shield",
+    slug: "vaccinations",
     desc: "Annual and puppy/kitten vaccination programs tailored to your pet's lifestyle and risk.",
     imageSrc:
       "https://images.pexels.com/photos/36111944/pexels-photo-36111944.jpeg?auto=compress&cs=tinysrgb&w=480",
@@ -65,6 +68,7 @@ export const SERVICES: ServiceCard[] = [
   {
     name: "Dental Care",
     icon: "sparkles",
+    slug: "dental-care",
     desc: "Professional dental cleans, extractions, and home dental advice to protect long-term health.",
     imageSrc:
       "https://images.pexels.com/photos/6235113/pexels-photo-6235113.jpeg?auto=compress&cs=tinysrgb&w=480",
@@ -73,6 +77,7 @@ export const SERVICES: ServiceCard[] = [
   {
     name: "Consultations",
     icon: "stethoscope",
+    slug: "consultations",
     desc: "Thorough, unhurried consultations for illnesses, check-ups, second opinions, and health concerns.",
     imageSrc:
       "https://images.pexels.com/photos/6235116/pexels-photo-6235116.jpeg?auto=compress&cs=tinysrgb&w=480",
@@ -81,6 +86,7 @@ export const SERVICES: ServiceCard[] = [
   {
     name: "Senior Pet Care",
     icon: "heart",
+    slug: "senior-pet-care",
     desc: "Specialised health monitoring for dogs and cats over seven — catching issues before they escalate.",
     imageSrc:
       "https://images.pexels.com/photos/6235231/pexels-photo-6235231.jpeg?auto=compress&cs=tinysrgb&w=480",
@@ -89,6 +95,7 @@ export const SERVICES: ServiceCard[] = [
   {
     name: "Desexing",
     icon: "scissors",
+    slug: "desexing",
     desc: "Safe, routine desexing procedures for dogs and cats with compassionate pre- and post-op care.",
     imageSrc:
       "https://images.pexels.com/photos/6131096/pexels-photo-6131096.jpeg?auto=compress&cs=tinysrgb&w=480",
@@ -97,6 +104,7 @@ export const SERVICES: ServiceCard[] = [
   {
     name: "Surgery",
     icon: "activity",
+    slug: "surgery",
     desc: "General soft-tissue surgery performed with careful anaesthetic monitoring and pain management.",
     imageSrc:
       "https://images.pexels.com/photos/7121992/pexels-photo-7121992.jpeg?auto=compress&cs=tinysrgb&w=480",
@@ -105,6 +113,7 @@ export const SERVICES: ServiceCard[] = [
   {
     name: "Dermatology",
     icon: "droplets",
+    slug: "dermatology",
     desc: "Diagnosis and management of skin conditions, allergies, and ear disease in dogs and cats.",
     imageSrc:
       "https://images.pexels.com/photos/5482555/pexels-photo-5482555.jpeg?auto=compress&cs=tinysrgb&w=480",
@@ -113,6 +122,7 @@ export const SERVICES: ServiceCard[] = [
   {
     name: "Microchipping",
     icon: "tag",
+    slug: "microchipping",
     desc: "Permanent identification implanted in seconds — and we'll register your pet's details on the spot.",
     imageSrc:
       "https://images.pexels.com/photos/6001208/pexels-photo-6001208.jpeg?auto=compress&cs=tinysrgb&w=480",
@@ -173,8 +183,8 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt:
       "If you have just picked up a puppy, vaccinations are probably on your mind alongside sleep, chewing, and where the wee pads went. Here is how Australian puppy courses usually work, what core vaccines cover, and how we plan visits at YB Vet in Yangebup.",
     category: "Preventive Care",
-    date: "2026-06-15",
-    dateFormatted: "15 June 2026",
+    date: "2026-05-15",
+    dateFormatted: "15 May 2026",
     readTime: "9 min read",
     author: "Dr Chloe Hutson",
     coverSrc:

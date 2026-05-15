@@ -140,6 +140,25 @@ export function webPageSchema(path: string, name: string, description: string) {
   };
 }
 
+export function medicalProcedureSchema(procedure: {
+  name: string;
+  description: string;
+  path: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalProcedure",
+    name: procedure.name,
+    description: procedure.description,
+    url: `https://ybvet.com.au${procedure.path}`,
+    provider: {
+      "@type": "VeterinaryCare",
+      name: CLINIC.fullName,
+      url: "https://ybvet.com.au",
+    },
+  };
+}
+
 export function faqSchema(faqs: { question: string; answer: string }[]) {
   return {
     "@context": "https://schema.org",
