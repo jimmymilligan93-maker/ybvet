@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
       "style-src 'self' 'unsafe-inline'",
       "font-src 'self' https://fonts.gstatic.com",
       "connect-src 'self'",
-      "frame-src https://www.google.com/maps/",
+      "frame-src https://www.google.com https://maps.google.com",
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'self'",

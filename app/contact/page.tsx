@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, ExternalLink } from "lucide-react";
+import ClinicMap from "@/components/contact/ClinicMap";
 import { CLINIC } from "@/lib/data";
+import { CLINIC_MAP } from "@/lib/maps";
 import { breadcrumbSchema } from "@/lib/schema";
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import PillBadge from "@/components/ui/PillBadge";
@@ -90,13 +91,13 @@ export default function ContactPage() {
                         Serving Yangebup, Beeliar, Success, Aubin Grove, Bibra Lake and surrounds.
                       </p>
                       <a
-                        href={`https://maps.google.com/?q=${encodeURIComponent(CLINIC.address)}`}
+                        href={CLINIC_MAP.directionsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-sm mt-3 font-semibold transition-opacity hover:opacity-70"
                         style={{ color: "var(--primary)" }}
                       >
-                        Open in Google Maps <ExternalLink size={13} />
+                        Get directions <ExternalLink size={13} />
                       </a>
                     </div>
                   </div>
@@ -150,23 +151,22 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Clinic care photo */}
-              <div
-                className="rounded-2xl overflow-hidden relative"
-                style={{
-                  height: 240,
-                }}
-              >
-                <Image
-                  src="https://images.pexels.com/photos/6235118/pexels-photo-6235118.jpeg?auto=compress&cs=tinysrgb&w=1400"
-                  alt="Veterinarian examining a small dog during a friendly consultation"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
             </AnimatedSection>
           </div>
+        </div>
+      </section>
+
+      {/* Map */}
+      <section className="section-pad" style={{ background: "var(--bg)" }}>
+        <div className="container">
+          <AnimatedSection>
+            <h2 className="mb-2">Find us</h2>
+            <p className="mb-8 max-w-2xl" style={{ color: "var(--muted)" }}>
+              We are in Shop 4 on Moorhen Drive, Yangebup — easy parking and a short drive from Beeliar,
+              Success, Aubin Grove, and Bibra Lake. Use the map to get directions before you visit.
+            </p>
+            <ClinicMap />
+          </AnimatedSection>
         </div>
       </section>
     </>

@@ -1,3 +1,5 @@
+import { PUPPY_TRAINING_BLOG_POST } from "@/lib/blog-posts/puppy-training-guide-australia";
+
 export const CLINIC = {
   name: "YB Vet",
   fullName: "Yangebup-Beeliar Vet Clinic",
@@ -174,6 +176,7 @@ export type BlogPost = {
 };
 
 export const BLOG_POSTS: BlogPost[] = [
+  PUPPY_TRAINING_BLOG_POST,
   {
     slug: "puppy-vaccinations-schedule-australia",
     title: "Puppy Vaccinations in Australia — Schedules, Core Vaccines, and First Vet Visits",
